@@ -1,7 +1,6 @@
 import numpy as np
 
-class KNearestNeighbor:
-	
+class KNearestNeighbor:	
 	def __init__(self):
 	    pass
 
@@ -18,7 +17,6 @@ class KNearestNeighbor:
       		dists = self.compute_distances_two_loops(X)
     	else:
       		raise ValueError('Invalid value %d for num_loops' % num_loops)
-
     return self.predict_labels(dists, k=k)
 
 	"""
@@ -41,7 +39,7 @@ class KNearestNeighbor:
         dists = np.zeros((num_test, num_train))
         for i in xrange(num_test):
         	###START CODE      			
-      			dists[i,:] = np.sum( (X[i,:] - self.X_train)**2, axis =1)
+      		dists[i,:] = np.sum( (X[i,:] - self.X_train)**2, axis =1)
       		###END CODE 
         return dists
 
@@ -65,8 +63,10 @@ class KNearestNeighbor:
         y_pred = np.zeros(num_test)
         
         for i in xrange(num_test):
+        	###START CODE      			
         	closest_y = self.y_train[np.argsort(dists[i,:])[:k]]
             u, indices = np.unique(closest_y, return_inverse=True)
             ypred[i] = u[np.argmax(np.bincount(indices))]
+            ###END CODE      			
 		return y_pred
 
